@@ -1,0 +1,11 @@
+spring:
+  version: @project.version@
+  application:
+    name: @project.artifactId@
+    des: "Eureka of Sonic Cloud Real Machine Platform"
+  profiles:
+    active: @project.artifactId@,logging
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cloud.sonic.controller.mapper.MtVersionMapper">
+  <resultMap id="BaseResultMap" type="org.cloud.sonic.controller.models.domain.MtVersion">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="version_name" jdbcType="VARCHAR" property="versionName" />
+    <result column="description_" jdbcType="VARCHAR" property="description" />
+    <result column="deleted_" jdbcType="BIT" property="deleted" />
+    <result column="creator_" jdbcType="VARCHAR" property="creator" />
+    <result column="rewriter_" jdbcType="VARCHAR" property="rewriter" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, project_id, version_name, description_, deleted_, creator_, rewriter_, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mt_version
+    where id_ = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mt_version
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.cloud.sonic.controller.models.domain.MtVersion">
+    insert into mt_version (id_, project_id, version_name, 
+      description_, deleted_, creator_, 
+      rewriter_, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{versionName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{creator,jdbcType=VARCHAR}, 
+      #{rewriter,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.cloud.sonic.controller.models.domain.MtVersion">
+    insert into mt_version
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="versionName != null">
+        version_name,
+      </if>
+      <if test="description != null">
+        description_,
+      </if>
+      <if test="deleted != null">
+        deleted_,
+      </if>
+      <if test="creator != null">
+        creator_,
+      </if>
+      <if test="rewriter != null">
+        rewriter_,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        #{rewriter,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cloud.sonic.controller.models.domain.MtVersion">
+    update mt_version
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null">
+        version_name = #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description_ = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted_ = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="creator != null">
+        creator_ = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        rewriter_ = #{rewriter,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cloud.sonic.controller.models.domain.MtVersion">
+    update mt_version
+    set project_id = #{projectId,jdbcType=INTEGER},
+      version_name = #{versionName,jdbcType=VARCHAR},
+      description_ = #{description,jdbcType=VARCHAR},
+      deleted_ = #{deleted,jdbcType=BIT},
+      creator_ = #{creator,jdbcType=VARCHAR},
+      rewriter_ = #{rewriter,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

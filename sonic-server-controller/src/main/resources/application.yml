@@ -1,0 +1,24 @@
+spring:
+  version: @project.version@
+  application:
+    name: @project.artifactId@
+    des: "Controller of Sonic Cloud Real Machine Platform"
+  profiles:
+    active: @project.artifactId@,eureka,jdbc,feign,logging,user
+  main:
+    allow-circular-references: true
+
+#mybatis:
+#
+#  global-config:
+#    banner: false
+mybatis:
+  mapper-locations: classpath*:mapping/*Mapper.xml
+#mybatis:
+#mybatis-plus:
+#  mapper-locations: classpath*:/xx/xx/mapper/*.xml
+#  type-aliases-package: org.cloud.sonic.common.dao
+#  configuration:
+#    jdbc-type-for-null: null
+#  global-config:
+#    banner: false

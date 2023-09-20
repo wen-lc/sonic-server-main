@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cloud.sonic.controller.mapper.MtProjectMapper">
+  <resultMap id="BaseResultMap" type="org.cloud.sonic.controller.models.domain.MtProject">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="imported_" jdbcType="BIT" property="imported" />
+    <result column="project_desc" jdbcType="VARCHAR" property="projectDesc" />
+    <result column="directory_path" jdbcType="VARCHAR" property="directoryPath" />
+    <result column="jira_projects" jdbcType="VARCHAR" property="jiraProjects" />
+    <result column="wechat_machine" jdbcType="VARCHAR" property="wechatMachine" />
+    <result column="color_" jdbcType="VARCHAR" property="color" />
+    <result column="issue_template_id" jdbcType="INTEGER" property="issueTemplateId" />
+    <result column="case_template_id" jdbcType="INTEGER" property="caseTemplateId" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="creator_" jdbcType="VARCHAR" property="creator" />
+    <result column="rewriter_" jdbcType="VARCHAR" property="rewriter" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, project_name, imported_, project_desc, directory_path, jira_projects, wechat_machine, 
+    color_, issue_template_id, case_template_id, create_time, update_time, creator_, 
+    rewriter_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mt_project
+    where id_ = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mt_project
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    insert into mt_project (id_, project_name, imported_, 
+      project_desc, directory_path, jira_projects, 
+      wechat_machine, color_, issue_template_id, 
+      case_template_id, create_time, update_time, 
+      creator_, rewriter_)
+    values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{imported,jdbcType=BIT}, 
+      #{projectDesc,jdbcType=VARCHAR}, #{directoryPath,jdbcType=VARCHAR}, #{jiraProjects,jdbcType=VARCHAR}, 
+      #{wechatMachine,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{issueTemplateId,jdbcType=INTEGER}, 
+      #{caseTemplateId,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
+      #{creator,jdbcType=VARCHAR}, #{rewriter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    insert into mt_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+      <if test="imported != null">
+        imported_,
+      </if>
+      <if test="projectDesc != null">
+        project_desc,
+      </if>
+      <if test="directoryPath != null">
+        directory_path,
+      </if>
+      <if test="jiraProjects != null">
+        jira_projects,
+      </if>
+      <if test="wechatMachine != null">
+        wechat_machine,
+      </if>
+      <if test="color != null">
+        color_,
+      </if>
+      <if test="issueTemplateId != null">
+        issue_template_id,
+      </if>
+      <if test="caseTemplateId != null">
+        case_template_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="creator != null">
+        creator_,
+      </if>
+      <if test="rewriter != null">
+        rewriter_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="imported != null">
+        #{imported,jdbcType=BIT},
+      </if>
+      <if test="projectDesc != null">
+        #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="jiraProjects != null">
+        #{jiraProjects,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatMachine != null">
+        #{wechatMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTemplateId != null">
+        #{issueTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTemplateId != null">
+        #{caseTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    update mt_project
+    <set>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="imported != null">
+        imported_ = #{imported,jdbcType=BIT},
+      </if>
+      <if test="projectDesc != null">
+        project_desc = #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        directory_path = #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="jiraProjects != null">
+        jira_projects = #{jiraProjects,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatMachine != null">
+        wechat_machine = #{wechatMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color_ = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTemplateId != null">
+        issue_template_id = #{issueTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTemplateId != null">
+        case_template_id = #{caseTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="creator != null">
+        creator_ = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        rewriter_ = #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    update mt_project
+    set project_name = #{projectName,jdbcType=VARCHAR},
+      imported_ = #{imported,jdbcType=BIT},
+      project_desc = #{projectDesc,jdbcType=VARCHAR},
+      directory_path = #{directoryPath,jdbcType=VARCHAR},
+      jira_projects = #{jiraProjects,jdbcType=VARCHAR},
+      wechat_machine = #{wechatMachine,jdbcType=VARCHAR},
+      color_ = #{color,jdbcType=VARCHAR},
+      issue_template_id = #{issueTemplateId,jdbcType=INTEGER},
+      case_template_id = #{caseTemplateId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE},
+      creator_ = #{creator,jdbcType=VARCHAR},
+      rewriter_ = #{rewriter,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="org.cloud.sonic.controller.models.domain.MtProject">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="imported_" jdbcType="BIT" property="imported" />
+    <result column="project_desc" jdbcType="VARCHAR" property="projectDesc" />
+    <result column="directory_path" jdbcType="VARCHAR" property="directoryPath" />
+    <result column="jira_projects" jdbcType="VARCHAR" property="jiraProjects" />
+    <result column="wechat_machine" jdbcType="VARCHAR" property="wechatMachine" />
+    <result column="color_" jdbcType="VARCHAR" property="color" />
+    <result column="issue_template_id" jdbcType="INTEGER" property="issueTemplateId" />
+    <result column="case_template_id" jdbcType="INTEGER" property="caseTemplateId" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="creator_" jdbcType="VARCHAR" property="creator" />
+    <result column="rewriter_" jdbcType="VARCHAR" property="rewriter" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, project_name, imported_, project_desc, directory_path, jira_projects, wechat_machine, 
+    color_, issue_template_id, case_template_id, create_time, update_time, creator_, 
+    rewriter_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mt_project
+    where id_ = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mt_project
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    insert into mt_project (id_, project_name, imported_, 
+      project_desc, directory_path, jira_projects, 
+      wechat_machine, color_, issue_template_id, 
+      case_template_id, create_time, update_time, 
+      creator_, rewriter_)
+    values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{imported,jdbcType=BIT}, 
+      #{projectDesc,jdbcType=VARCHAR}, #{directoryPath,jdbcType=VARCHAR}, #{jiraProjects,jdbcType=VARCHAR}, 
+      #{wechatMachine,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{issueTemplateId,jdbcType=INTEGER}, 
+      #{caseTemplateId,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
+      #{creator,jdbcType=VARCHAR}, #{rewriter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    insert into mt_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+      <if test="imported != null">
+        imported_,
+      </if>
+      <if test="projectDesc != null">
+        project_desc,
+      </if>
+      <if test="directoryPath != null">
+        directory_path,
+      </if>
+      <if test="jiraProjects != null">
+        jira_projects,
+      </if>
+      <if test="wechatMachine != null">
+        wechat_machine,
+      </if>
+      <if test="color != null">
+        color_,
+      </if>
+      <if test="issueTemplateId != null">
+        issue_template_id,
+      </if>
+      <if test="caseTemplateId != null">
+        case_template_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="creator != null">
+        creator_,
+      </if>
+      <if test="rewriter != null">
+        rewriter_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="imported != null">
+        #{imported,jdbcType=BIT},
+      </if>
+      <if test="projectDesc != null">
+        #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="jiraProjects != null">
+        #{jiraProjects,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatMachine != null">
+        #{wechatMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTemplateId != null">
+        #{issueTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTemplateId != null">
+        #{caseTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    update mt_project
+    <set>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="imported != null">
+        imported_ = #{imported,jdbcType=BIT},
+      </if>
+      <if test="projectDesc != null">
+        project_desc = #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        directory_path = #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="jiraProjects != null">
+        jira_projects = #{jiraProjects,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatMachine != null">
+        wechat_machine = #{wechatMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color_ = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTemplateId != null">
+        issue_template_id = #{issueTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTemplateId != null">
+        case_template_id = #{caseTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="creator != null">
+        creator_ = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        rewriter_ = #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    update mt_project
+    set project_name = #{projectName,jdbcType=VARCHAR},
+      imported_ = #{imported,jdbcType=BIT},
+      project_desc = #{projectDesc,jdbcType=VARCHAR},
+      directory_path = #{directoryPath,jdbcType=VARCHAR},
+      jira_projects = #{jiraProjects,jdbcType=VARCHAR},
+      wechat_machine = #{wechatMachine,jdbcType=VARCHAR},
+      color_ = #{color,jdbcType=VARCHAR},
+      issue_template_id = #{issueTemplateId,jdbcType=INTEGER},
+      case_template_id = #{caseTemplateId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE},
+      creator_ = #{creator,jdbcType=VARCHAR},
+      rewriter_ = #{rewriter,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="org.cloud.sonic.controller.models.domain.MtProject">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="imported_" jdbcType="BIT" property="imported" />
+    <result column="project_desc" jdbcType="VARCHAR" property="projectDesc" />
+    <result column="directory_path" jdbcType="VARCHAR" property="directoryPath" />
+    <result column="jira_projects" jdbcType="VARCHAR" property="jiraProjects" />
+    <result column="wechat_machine" jdbcType="VARCHAR" property="wechatMachine" />
+    <result column="color_" jdbcType="VARCHAR" property="color" />
+    <result column="issue_template_id" jdbcType="INTEGER" property="issueTemplateId" />
+    <result column="case_template_id" jdbcType="INTEGER" property="caseTemplateId" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="creator_" jdbcType="VARCHAR" property="creator" />
+    <result column="rewriter_" jdbcType="VARCHAR" property="rewriter" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, project_name, imported_, project_desc, directory_path, jira_projects, wechat_machine, 
+    color_, issue_template_id, case_template_id, create_time, update_time, creator_, 
+    rewriter_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mt_project
+    where id_ = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mt_project
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    insert into mt_project (id_, project_name, imported_, 
+      project_desc, directory_path, jira_projects, 
+      wechat_machine, color_, issue_template_id, 
+      case_template_id, create_time, update_time, 
+      creator_, rewriter_)
+    values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{imported,jdbcType=BIT}, 
+      #{projectDesc,jdbcType=VARCHAR}, #{directoryPath,jdbcType=VARCHAR}, #{jiraProjects,jdbcType=VARCHAR}, 
+      #{wechatMachine,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{issueTemplateId,jdbcType=INTEGER}, 
+      #{caseTemplateId,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
+      #{creator,jdbcType=VARCHAR}, #{rewriter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    insert into mt_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+      <if test="imported != null">
+        imported_,
+      </if>
+      <if test="projectDesc != null">
+        project_desc,
+      </if>
+      <if test="directoryPath != null">
+        directory_path,
+      </if>
+      <if test="jiraProjects != null">
+        jira_projects,
+      </if>
+      <if test="wechatMachine != null">
+        wechat_machine,
+      </if>
+      <if test="color != null">
+        color_,
+      </if>
+      <if test="issueTemplateId != null">
+        issue_template_id,
+      </if>
+      <if test="caseTemplateId != null">
+        case_template_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="creator != null">
+        creator_,
+      </if>
+      <if test="rewriter != null">
+        rewriter_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="imported != null">
+        #{imported,jdbcType=BIT},
+      </if>
+      <if test="projectDesc != null">
+        #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="jiraProjects != null">
+        #{jiraProjects,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatMachine != null">
+        #{wechatMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTemplateId != null">
+        #{issueTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTemplateId != null">
+        #{caseTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    update mt_project
+    <set>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="imported != null">
+        imported_ = #{imported,jdbcType=BIT},
+      </if>
+      <if test="projectDesc != null">
+        project_desc = #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        directory_path = #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="jiraProjects != null">
+        jira_projects = #{jiraProjects,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatMachine != null">
+        wechat_machine = #{wechatMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color_ = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTemplateId != null">
+        issue_template_id = #{issueTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTemplateId != null">
+        case_template_id = #{caseTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="creator != null">
+        creator_ = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        rewriter_ = #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    update mt_project
+    set project_name = #{projectName,jdbcType=VARCHAR},
+      imported_ = #{imported,jdbcType=BIT},
+      project_desc = #{projectDesc,jdbcType=VARCHAR},
+      directory_path = #{directoryPath,jdbcType=VARCHAR},
+      jira_projects = #{jiraProjects,jdbcType=VARCHAR},
+      wechat_machine = #{wechatMachine,jdbcType=VARCHAR},
+      color_ = #{color,jdbcType=VARCHAR},
+      issue_template_id = #{issueTemplateId,jdbcType=INTEGER},
+      case_template_id = #{caseTemplateId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE},
+      creator_ = #{creator,jdbcType=VARCHAR},
+      rewriter_ = #{rewriter,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="org.cloud.sonic.controller.models.domain.MtProject">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="imported_" jdbcType="BIT" property="imported" />
+    <result column="project_desc" jdbcType="VARCHAR" property="projectDesc" />
+    <result column="directory_path" jdbcType="VARCHAR" property="directoryPath" />
+    <result column="jira_projects" jdbcType="VARCHAR" property="jiraProjects" />
+    <result column="wechat_machine" jdbcType="VARCHAR" property="wechatMachine" />
+    <result column="color_" jdbcType="VARCHAR" property="color" />
+    <result column="issue_template_id" jdbcType="INTEGER" property="issueTemplateId" />
+    <result column="case_template_id" jdbcType="INTEGER" property="caseTemplateId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="creator_" jdbcType="VARCHAR" property="creator" />
+    <result column="rewriter_" jdbcType="VARCHAR" property="rewriter" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, project_name, imported_, project_desc, directory_path, jira_projects, wechat_machine, 
+    color_, issue_template_id, case_template_id, create_time, update_time, creator_, 
+    rewriter_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mt_project
+    where id_ = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mt_project
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    insert into mt_project (id_, project_name, imported_, 
+      project_desc, directory_path, jira_projects, 
+      wechat_machine, color_, issue_template_id, 
+      case_template_id, create_time, update_time, 
+      creator_, rewriter_)
+    values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{imported,jdbcType=BIT}, 
+      #{projectDesc,jdbcType=VARCHAR}, #{directoryPath,jdbcType=VARCHAR}, #{jiraProjects,jdbcType=VARCHAR}, 
+      #{wechatMachine,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{issueTemplateId,jdbcType=INTEGER}, 
+      #{caseTemplateId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{rewriter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    insert into mt_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+      <if test="imported != null">
+        imported_,
+      </if>
+      <if test="projectDesc != null">
+        project_desc,
+      </if>
+      <if test="directoryPath != null">
+        directory_path,
+      </if>
+      <if test="jiraProjects != null">
+        jira_projects,
+      </if>
+      <if test="wechatMachine != null">
+        wechat_machine,
+      </if>
+      <if test="color != null">
+        color_,
+      </if>
+      <if test="issueTemplateId != null">
+        issue_template_id,
+      </if>
+      <if test="caseTemplateId != null">
+        case_template_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="creator != null">
+        creator_,
+      </if>
+      <if test="rewriter != null">
+        rewriter_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="imported != null">
+        #{imported,jdbcType=BIT},
+      </if>
+      <if test="projectDesc != null">
+        #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="jiraProjects != null">
+        #{jiraProjects,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatMachine != null">
+        #{wechatMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTemplateId != null">
+        #{issueTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTemplateId != null">
+        #{caseTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    update mt_project
+    <set>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="imported != null">
+        imported_ = #{imported,jdbcType=BIT},
+      </if>
+      <if test="projectDesc != null">
+        project_desc = #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        directory_path = #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="jiraProjects != null">
+        jira_projects = #{jiraProjects,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatMachine != null">
+        wechat_machine = #{wechatMachine,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color_ = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issueTemplateId != null">
+        issue_template_id = #{issueTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="caseTemplateId != null">
+        case_template_id = #{caseTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator_ = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        rewriter_ = #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cloud.sonic.controller.models.domain.MtProject">
+    update mt_project
+    set project_name = #{projectName,jdbcType=VARCHAR},
+      imported_ = #{imported,jdbcType=BIT},
+      project_desc = #{projectDesc,jdbcType=VARCHAR},
+      directory_path = #{directoryPath,jdbcType=VARCHAR},
+      jira_projects = #{jiraProjects,jdbcType=VARCHAR},
+      wechat_machine = #{wechatMachine,jdbcType=VARCHAR},
+      color_ = #{color,jdbcType=VARCHAR},
+      issue_template_id = #{issueTemplateId,jdbcType=INTEGER},
+      case_template_id = #{caseTemplateId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creator_ = #{creator,jdbcType=VARCHAR},
+      rewriter_ = #{rewriter,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

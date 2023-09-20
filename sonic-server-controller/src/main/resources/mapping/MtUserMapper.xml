@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cloud.sonic.controller.mapper.MtUserMapper">
+  <resultMap id="BaseResultMap" type="org.cloud.sonic.controller.models.dto.MtUserDTO">
+    <id column="id_" jdbcType="INTEGER" property="id" />
+    <result column="username_" jdbcType="VARCHAR" property="username" />
+    <result column="password_" jdbcType="VARCHAR" property="password" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_photo" jdbcType="VARCHAR" property="userPhoto" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="user_resource" jdbcType="VARCHAR" property="userResource" />
+    <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="wechat_user_id" jdbcType="VARCHAR" property="wechatUserId" />
+    <result column="directory_path" jdbcType="VARCHAR" property="directoryPath" />
+    <result column="captcha_times" jdbcType="INTEGER" property="captchaTimes" />
+    <result column="locked_times" jdbcType="INTEGER" property="lockedTimes" />
+    <result column="deleted_" jdbcType="BIT" property="deleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="creator_" jdbcType="VARCHAR" property="creator" />
+    <result column="rewriter_" jdbcType="VARCHAR" property="rewriter" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_, username_, password_, user_email, user_photo, real_name, user_resource, user_status, 
+    last_login_time, user_type, project_id, wechat_user_id, directory_path, captcha_times, 
+    locked_times, deleted_, create_time, update_time, creator_, rewriter_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mt_user
+    where id_ = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mt_user
+    where id_ = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.cloud.sonic.controller.models.dto.MtUserDTO">
+    insert into mt_user (id_, username_, password_, 
+      user_email, user_photo, real_name, 
+      user_resource, user_status, last_login_time, 
+      user_type, project_id, wechat_user_id, 
+      directory_path, captcha_times, locked_times, 
+      deleted_, create_time, update_time, 
+      creator_, rewriter_)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{userPhoto,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{userResource,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{userType,jdbcType=VARCHAR}, #{projectId,jdbcType=INTEGER}, #{wechatUserId,jdbcType=VARCHAR}, 
+      #{directoryPath,jdbcType=VARCHAR}, #{captchaTimes,jdbcType=INTEGER}, #{lockedTimes,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{rewriter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cloud.sonic.controller.models.dto.MtUserDTO">
+    insert into mt_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id_,
+      </if>
+      <if test="username != null">
+        username_,
+      </if>
+      <if test="password != null">
+        password_,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userPhoto != null">
+        user_photo,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="userResource != null">
+        user_resource,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="wechatUserId != null">
+        wechat_user_id,
+      </if>
+      <if test="directoryPath != null">
+        directory_path,
+      </if>
+      <if test="captchaTimes != null">
+        captcha_times,
+      </if>
+      <if test="lockedTimes != null">
+        locked_times,
+      </if>
+      <if test="deleted != null">
+        deleted_,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="creator != null">
+        creator_,
+      </if>
+      <if test="rewriter != null">
+        rewriter_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null">
+        #{userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userResource != null">
+        #{userResource,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="wechatUserId != null">
+        #{wechatUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="captchaTimes != null">
+        #{captchaTimes,jdbcType=INTEGER},
+      </if>
+      <if test="lockedTimes != null">
+        #{lockedTimes,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cloud.sonic.controller.models.dto.MtUserDTO">
+    update mt_user
+    <set>
+      <if test="username != null">
+        username_ = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password_ = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null">
+        user_photo = #{userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="userResource != null">
+        user_resource = #{userResource,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="wechatUserId != null">
+        wechat_user_id = #{wechatUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryPath != null">
+        directory_path = #{directoryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="captchaTimes != null">
+        captcha_times = #{captchaTimes,jdbcType=INTEGER},
+      </if>
+      <if test="lockedTimes != null">
+        locked_times = #{lockedTimes,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        deleted_ = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator_ = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="rewriter != null">
+        rewriter_ = #{rewriter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cloud.sonic.controller.models.dto.MtUserDTO">
+    update mt_user
+    set username_ = #{username,jdbcType=VARCHAR},
+      password_ = #{password,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_photo = #{userPhoto,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      user_resource = #{userResource,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      user_type = #{userType,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      wechat_user_id = #{wechatUserId,jdbcType=VARCHAR},
+      directory_path = #{directoryPath,jdbcType=VARCHAR},
+      captcha_times = #{captchaTimes,jdbcType=INTEGER},
+      locked_times = #{lockedTimes,jdbcType=INTEGER},
+      deleted_ = #{deleted,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creator_ = #{creator,jdbcType=VARCHAR},
+      rewriter_ = #{rewriter,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
