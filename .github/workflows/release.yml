@@ -25,24 +25,24 @@ jobs:
         id: previoustag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
       - name: replace version
-        run: sed -i "s/SONIC_VERSION/v1.0.1/g" docker-compose*.yml
+        run: sed -i "s/SONIC_VERSION/${{ steps.previoustag.outputs.tag }}/g" docker-compose*.yml
       - name: mkdir
-        run: mkdir -p sonic-server-v1.0.1/imageFiles sonic-server-v1.0.1/keepFiles sonic-server-v1.0.1/logs sonic-server-v1.0.1/packageFiles sonic-server-v1.0.1/recordFiles
+        run: mkdir -p sonic-server-${{ steps.previoustag.outputs.tag }}/imageFiles sonic-server-${{ steps.previoustag.outputs.tag }}/keepFiles sonic-server-${{ steps.previoustag.outputs.tag }}/logs sonic-server-${{ steps.previoustag.outputs.tag }}/packageFiles sonic-server-${{ steps.previoustag.outputs.tag }}/recordFiles
       - name: copy
-        run: cp .env docker-compose*.yml sonic-server-v1.0.1/
+        run: cp .env docker-compose*.yml sonic-server-${{ steps.previoustag.outputs.tag }}/
       - name: zip
         uses: TheDoctor0/zip-release@0.6.2
         with:
-          filename: sonic-server-v1.0.1.zip
-          directory: sonic-server-v1.0.1
+          filename: sonic-server-${{ steps.previoustag.outputs.tag }}.zip
+          directory: sonic-server-${{ steps.previoustag.outputs.tag }}
       - name: move outside
-        run: mv sonic-server-v1.0.1/sonic-server-v1.0.1.zip ./sonic-server-v1.0.1.zip
+        run: mv sonic-server-${{ steps.previoustag.outputs.tag }}/sonic-server-${{ steps.previoustag.outputs.tag }}.zip ./sonic-server-${{ steps.previoustag.outputs.tag }}.zip
       - name: Upload To Github Release
         uses: xresloader/upload-to-github-release@v1.3.4
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          file: sonic-server-v1.0.1.zip
-          tag_name: v1.0.1
+          file: sonic-server-${{ steps.previoustag.outputs.tag }}.zip
+          tag_name: ${{ steps.previoustag.outputs.tag }}
           update_latest_release: true
           draft: false
