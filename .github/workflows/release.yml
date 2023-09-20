@@ -1,8 +1,5 @@
 name: release to github
-#  你提供的文件是一个GitHub Actions的配置文件，它定义了在特定事件（例如标签推送）发生时自动执行的工作流程。这个配置文件是YAML格式的，
-#  用于定义一组操作，这些操作会在触发指定的事件时执行。
-#
-#  在你的配置文件中，当标签以"v*.."的形式被推送时，会触发一个工作流程。这个工作流程包含两个作业：create和build。
+
 on:
   push:
     tags:
@@ -28,24 +25,24 @@ jobs:
         id: previoustag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
       - name: replace version
-        run: sed -i "s/SONIC_VERSION/${{ steps.previoustag.outputs.tag }}/g" docker-compose*.yml
+        run: sed -i "s/SONIC_VERSION/v1.0.1/g" docker-compose*.yml
       - name: mkdir
-        run: mkdir -p sonic-server-${{ steps.previoustag.outputs.tag }}/imageFiles sonic-server-${{ steps.previoustag.outputs.tag }}/keepFiles sonic-server-${{ steps.previoustag.outputs.tag }}/logs sonic-server-${{ steps.previoustag.outputs.tag }}/packageFiles sonic-server-${{ steps.previoustag.outputs.tag }}/recordFiles
+        run: mkdir -p sonic-server-v1.0.1/imageFiles sonic-server-v1.0.1/keepFiles sonic-server-v1.0.1/logs sonic-server-v1.0.1/packageFiles sonic-server-v1.0.1/recordFiles
       - name: copy
-        run: cp .env docker-compose*.yml sonic-server-${{ steps.previoustag.outputs.tag }}/
+        run: cp .env docker-compose*.yml sonic-server-v1.0.1/
       - name: zip
         uses: TheDoctor0/zip-release@0.6.2
         with:
-          filename: sonic-server-${{ steps.previoustag.outputs.tag }}.zip
-          directory: sonic-server-${{ steps.previoustag.outputs.tag }}
+          filename: sonic-server-v1.0.1.zip
+          directory: sonic-server-v1.0.1
       - name: move outside
-        run: mv sonic-server-${{ steps.previoustag.outputs.tag }}/sonic-server-${{ steps.previoustag.outputs.tag }}.zip ./sonic-server-${{ steps.previoustag.outputs.tag }}.zip
+        run: mv sonic-server-v1.0.1/sonic-server-v1.0.1.zip ./sonic-server-v1.0.1.zip
       - name: Upload To Github Release
         uses: xresloader/upload-to-github-release@v1.3.4
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: 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
         with:
-          file: sonic-server-${{ steps.previoustag.outputs.tag }}.zip
-          tag_name: ${{ steps.previoustag.outputs.tag }}
+          file: sonic-server-v1.0.1.zip
+          tag_name: v1.0.1
           update_latest_release: true
           draft: false
